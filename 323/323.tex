@@ -4,7 +4,10 @@
 \usepackage[utf8x]{inputenc} % Включаем поддержку UTF8
 \usepackage[russian]{babel}  % Включаем пакет для поддержки русского языка
 \usepackage{booktabs}
- \usepackage{float}
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\DeclareGraphicsExtensions{.png,.jpg}
 \title{\LaTeX}
 \date{}
 \author{}
@@ -13,6 +16,24 @@
 	\section*{Упражнение 1}
 	
 	\indent
+	
+	\begin{figure}[H]
+		\center{\includegraphics[scale=0.9]{323IUFull.png}}
+		\caption{ВАХ диода полностью}
+		\label{fig:image}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\center{\includegraphics[scale=0.9, angle=90]{323IULine.png}}
+		\caption{Прямая ветвь ВАХ}
+		\label{fig:image2}
+	\end{figure}
+
+\begin{figure}[H]
+	\center{\includegraphics[scale=0.9, angle=90]{323IULineFit.png}}
+	\caption{Проверка теоретической зависимости $\ln I(U)$}
+	\label{fig:image3}
+\end{figure}
 	
 	
 \begin{minipage}{0.4\textwidth}
@@ -64,6 +85,11 @@
 	
 \end{minipage}
 
+$\ln I(U) = A \: U + B \Longrightarrow \left\lbrace \begin{array}{c}
+A = 32.5 \pm 0.3 \: V^{-1}\\ 
+B = -21.2 \pm 0.2\\ 
+r \approx 0.9996
+\end{array}\right. $
 
 \section*{Упражнение 2}
 \indent
@@ -84,6 +110,12 @@
 \caption{Зависимость барьерной ёмкости диода от напряжения}
 \end{table}
 
+\begin{figure}[H]
+	\center{\includegraphics[scale=0.90, angle=90]{323CU.png}}
+	\caption{Зависимость барьерной ёмкости диода от напряжения}
+	\label{fig:image4}
+\end{figure}
+
 \section*{Упражнение 3}
   
   \begin{table}[H]
@@ -99,4 +131,60 @@
   \end{tabular}
 \caption{Зависимость напряжения на диоде от температуры}
 \end{table}
+
+\begin{figure}[H]
+	\center{\includegraphics[scale=0.7, angle=0]{323TU.png}}
+	\caption{Зависимость напряжения на диоде от температуры}
+	\label{fig:image5}
+\end{figure}
+
+$U = A \: T + B \Longrightarrow \left\lbrace \begin{array}{c}
+A = -0.00179 \pm 0.00007 \: V \cdot K^{-1}\\ 
+B = 1.23 \pm 0.02 \: V\\ 
+r \approx -0.9984
+\end{array}\right. $
+
+
+\section*{Упражнение 4}
+
+\begin{figure}[H]
+	\begin{minipage}[h]{0.47\linewidth}
+		\center{\includegraphics[width=1\linewidth]{1.jpg}} a) \\
+	\end{minipage}
+	\hfill
+	\begin{minipage}[h]{0.47\linewidth}
+		\center{\includegraphics[width=1\linewidth]{2.jpg}} \\b)
+	\end{minipage}
+	\vfill
+	\begin{minipage}[h]{0.47\linewidth}
+		\center{\includegraphics[width=1\linewidth]{3.jpg}} c) \\
+	\end{minipage}
+	\hfill
+	\begin{minipage}[h]{0.47\linewidth}
+		\center{\includegraphics[width=1\linewidth]{4.jpg}} d) \\
+	\end{minipage}
+	\caption{Осциллограммы напряжения на выходе однополупериодного выпрямителя со сглаживающими емкостями a)$C = 0$; b)$C_1$; c)$C_2 > C_1$; d)$C_3 > C_2$.}
+	\label{ris:image6}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{minipage}[h]{0.47\linewidth}
+		\center{\includegraphics[width=1\linewidth]{5.jpg}} a) \\
+	\end{minipage}
+	\hfill
+	\begin{minipage}[h]{0.47\linewidth}
+		\center{\includegraphics[width=1\linewidth]{6.jpg}} \\b)
+	\end{minipage}
+	\vfill
+	\begin{minipage}[h]{0.47\linewidth}
+		\center{\includegraphics[width=1\linewidth]{7.jpg}} c) \\
+	\end{minipage}
+	\hfill
+	\begin{minipage}[h]{0.47\linewidth}
+		\center{\includegraphics[width=1\linewidth]{8.jpg}} d) \\
+	\end{minipage}
+	\caption{Осциллограммы напряжения на выходе двухполупериодный мостикового выпрямителя со сглаживающими емкостями a)$C = 0$; b)$C_1$; c)$C_2 > C_1$; d)$C_3 > C_2$.}
+	\label{ris:image6}
+\end{figure}
+
 \end{document}

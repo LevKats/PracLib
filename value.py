@@ -176,6 +176,24 @@ class Value:
         else:
             return b + er_b <= a - er_a
 
+    @value_operator_decorator
+    def __lt__(self, other):
+        a, er_a = self.get_value_error()
+        b, er_b = other.get_value_error()
+        return a + er_a < b + er_b
+
+    @value_operator_decorator
+    def __le__(self, other):
+        return self < other or self == other
+
+    @value_operator_decorator
+    def __gt__(self, other):
+        return other < self
+
+    @value_operator_decorator
+    def __ge__(self, other):
+        return other <= self
+
     def use_func(self, func):
         """:return Value object with symbol equal to func(self.__symbol)"""
         return Value(symbol=func(self.__symbol), dict=self.__dct, ignoreset=self.__ignoreset)

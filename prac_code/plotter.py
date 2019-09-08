@@ -3,11 +3,6 @@ from collections import namedtuple
 from os.path import join
 from multiprocessing import Pool
 
-# from praclib import get_sigma_a
-# from praclib import get_sigma_b
-# from praclib import get_r
-# from praclib import rounding
-
 import numpy as np
 
 from scipy.stats import pearsonr

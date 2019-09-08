@@ -3,11 +3,11 @@ Value module
 
 Contains Value class that can be used to calculate errors and value_operator_decorator to write methods
 """
-from praclib import get_pair
-from praclib import get_deviation
-from praclib import print_with_deviation
-from praclib import rounding
-from praclib import dict_adding
+from prac_code.praclib import get_pair
+from prac_code.praclib import get_deviation
+from prac_code.praclib import print_with_deviation
+from prac_code.praclib import rounding
+from prac_code.praclib import dict_adding
 
 from sympy import Symbol
 from copy import deepcopy

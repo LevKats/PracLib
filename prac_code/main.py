@@ -1,5 +1,5 @@
-from plotter import Plotter
-from value import Value
+from prac_code.plotter import Plotter
+from prac_code.value import Value
 import numpy as np
 
 

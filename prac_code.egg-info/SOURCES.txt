@@ -1,0 +1,13 @@
+setup.py
+prac_code/__init__.py
+prac_code/main.py
+prac_code/plotter.py
+prac_code/praclib.py
+prac_code/tables.py
+prac_code/value.py
+prac_code.egg-info/PKG-INFO
+prac_code.egg-info/SOURCES.txt
+prac_code.egg-info/dependency_links.txt
+prac_code.egg-info/not-zip-safe
+prac_code.egg-info/requires.txt
+prac_code.egg-info/top_level.txt

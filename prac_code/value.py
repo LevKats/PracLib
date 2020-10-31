@@ -64,6 +64,10 @@ class Value:
             Value.__count += 1
             self.__dct = {self.__symbol: get_pair(value=val, deviation=0.0)}
             self.__ignoreset = {self.__symbol}
+        elif len(args) == 2:
+            name = "c{}".format(Value.__count)
+            Value.__count += 1
+            self.__create_new_symbol(name, [args[0]], args[1])
         else:
             raise ValueError(
                 "incorrect **args: there must be dict, symbol and ignoreset or values and syst or const"
@@ -197,3 +201,7 @@ class Value:
     def use_func(self, func):
         """:return Value object with symbol equal to func(self.__symbol)"""
         return Value(symbol=func(self.__symbol), dict=self.__dct, ignoreset=self.__ignoreset)
+
+
+def create_error(errorsize):
+    return Value(0, errorsize)

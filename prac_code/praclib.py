@@ -1,4 +1,4 @@
-from sympy import sqrt, Symbol, diff, evaluate, latex
+from sympy import sqrt, Symbol, diff, evaluate, latex, simplify
 from decimal import Decimal
 
 
@@ -17,6 +17,10 @@ def get_pair(**kwargs):
 
 
 def print_with_deviation(f, dct, ignoreset=set(), notebook=True):
+    dct3 = {}
+    for name in ignoreset:
+        dct3[name] = dct[name][0]
+    f = simplify(f.subs(dct3))
     dev = get_deviation(f, dct, ignoreset)
     dct2 = dict((s, dct[s][0]) for s in dct)
     rnd = rounding(float(f.subs(dct2)), float(dev[2]))
@@ -34,6 +38,7 @@ def get_deviation(f, dct, ignoreset=set()):
     sdct = dict((s, Symbol('sigma_' + str(s))) for s in dct)
     sdct2 = dict((sdct[s], dct[s][1]) for s in dct)
     res = sqrt(sum([(diff(f, s) * sdct[s]) ** 2 for s in dct if s not in ignoreset]))
+    res = simplify(res)
     vls = dict((s, dct[s][0]) for s in dct)
     vls.update(sdct2)
     with evaluate(False):

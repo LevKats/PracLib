@@ -8,7 +8,7 @@ setup(name='prac_code',
       author='Lev Kats',
       packages=find_packages(),
       install_requires=[
-          'sympy', 'matplotlib', 'numpy', 'scipy', 'pandas'
+          'sympy < 1.7.0', 'matplotlib', 'numpy', 'scipy', 'pandas'
       ],
       include_package_data=True,
       zip_safe=False)

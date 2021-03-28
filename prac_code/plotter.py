@@ -17,7 +17,9 @@ class Plotter:
         'marker',
         'draw_error',
         'fit',
-        'legend'
+        'legend',
+        'func',
+        'p0'
     ])
 
     FitParameters = namedtuple("FitParameters", [
@@ -25,6 +27,10 @@ class Plotter:
         "a", "sigma_a",
         "b", "sigma_b",
         "r"
+    ])
+    FitParametersNonLinear = namedtuple("FitParametersNonLinear", [
+        "legend",
+        "params", "sigma_params",
     ])
 
     @staticmethod
@@ -36,7 +42,9 @@ class Plotter:
             kwargs['marker'],
             kwargs['draw_error'],
             kwargs['fit'],
-            kwargs['legend']
+            kwargs['legend'],
+            kwargs['func'] if 'func' in kwargs else None,
+            kwargs['p0'] if 'p0' in kwargs else None
         )
 
     class Scale:
@@ -50,6 +58,7 @@ class Plotter:
     PLT_YSCALE = "linear"
     PLT_XSCALE = "linear"
     NUM_PROC = 5
+    NUM_POINTS = 100
 
     def __init__(self, **kwargs):
         self.__lines = kwargs['lines'] if 'lines' in kwargs else []
@@ -131,6 +140,17 @@ class Plotter:
         plt.plot(x_data, y_fit, color=line.color, linestyle='-', marker='', linewidth=2 * Plotter.SIZE)
         return Plotter.FitParameters(line.legend, res_a, a_deviation, res_b, b_deviation, line_r)
 
+    @staticmethod
+    def __nonlinear_fit(line, x_data, y_data, sigmay):
+        if line.p0 is not None:
+            res_params, pcov = curve_fit(line.func, x_data, y_data, p0=line.p0, sigma=sigmay)
+        else:
+            res_params, pcov = curve_fit(line.func, x_data, y_data, sigma=sigmay)
+        x_fit = np.linspace(x_data.min(), x_data.max(), Plotter.NUM_POINTS)
+        y_fit = line.func(x_fit, *res_params)
+        plt.plot(x_fit, y_fit, color=line.color, linestyle='-', marker='', linewidth=2 * Plotter.SIZE)
+        return Plotter.FitParametersNonLinear(line.legend, res_params, np.sqrt(np.diag(pcov)))
+
     def __draw_lines(self):
         fit_lines = []
         for line in self.__lines:
@@ -163,8 +183,10 @@ class Plotter:
             sigmax = x_val_error[::, 1] * Plotter.NUMBER_OF_SIGMA
             sigmay = y_val_error[::, 1] * Plotter.NUMBER_OF_SIGMA
 
-            if line.fit:
+            if line.fit and line.func is None:
                 fit_lines.append(Plotter.__line_fit(line, x_data, y_data, sigmay))
+            elif line.fit and line.func is not None:
+                fit_lines.append(Plotter.__nonlinear_fit(line, x_data, y_data, sigmay))
             if line.draw_error:
                 plt.errorbar(x_data, y_data, ecolor=line.color,
                              yerr=sigmay, xerr=sigmax,

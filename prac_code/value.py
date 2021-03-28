@@ -203,5 +203,11 @@ class Value:
         return Value(symbol=func(self.__symbol), dict=self.__dct, ignoreset=self.__ignoreset)
 
 
-def create_error(errorsize):
-    return Value(0, errorsize)
+def create_error(errorsize, like_array=None):
+    if like_array is not None:
+        return np.fromfunction(
+            lambda *args: Value(0, errorsize),
+            shape=np.asarray(like_array).shape
+        )
+    else:
+        return Value(0, errorsize)

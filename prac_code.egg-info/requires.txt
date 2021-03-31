@@ -1,4 +1,4 @@
-sympy
+sympy<1.7.0
 matplotlib
 numpy
 scipy

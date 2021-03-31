@@ -14,6 +14,7 @@ def main():
         .add_line(Plotter.Line(x, y * y, "gray", "v", True, True, "lol2", (lambda _x, a, b, c: a * _x**2 + b * _x + c), None))\
         .plot(show=True)
     print(fit)
+    print(Value(1.0, 2.0))
 
 
 if __name__ == '__main__':
